@@ -1,0 +1,80 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css")
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css")
+        title Stock Movements Panel
+    body 
+        nav.navbar.bg-primary.navbar-dark
+            .container-fluid
+                .row.w-100.d-flex.align-items-center
+                    .col
+                        a.navbar-brand(href="/") Home Page
+                        a.navbar-brand(href="/data-queries") Query Pages
+                    .col.text-center
+                        h1.text-white Stock Movements Panel
+                    .col.text-end                      
+                        i.fas.fa-print.fa-2x(style="color: white;")
+
+        
+        h1 Add Product to Stock
+        form.border.border-2(method="POST" action="/add-stock")
+            .row.mb-5
+                .col.md-3
+                    label.form-label(for="add_stock_code") Stock Code
+                    input#add_stock_code.form-control(type="text" name="stock_code" required)
+                .col.md-3
+                    label.form-label(for="stock_trade_mark") Stock Trade Mark
+                    input#stock_trade_mark.form-control(type="text" name="stock_trade_mark" required)
+                .col.md-3
+                    label.form-label(for="stock_category") Stock Category
+                    input#stock_category.form-control(type="text" name="stock_category" required)
+                .col.md-3
+                    label.form-label(for="stock_model") Stock Model
+                    input#stock_model.form-control(type="text" name="stock_model" required)
+                .col.md-3
+                    label.form-label(for="movement_type") Movement Type
+                    input#movement_type.form-control(type="text" name="movement_type" required)
+                .col.md-3
+                    label.form-label(for="stock_date") Stock Date
+                    input#stock_date.form-control(type="date" name="stock_date" required)
+                .col.md-3
+                    label.form-label(for="stock_added") Stock Added
+                    input#stock_added.form-control(type="text" name="stock_added" required)
+            .row
+                .col.d-flex.justify-content-center
+                    button.btn.btn-primary(type="submit") Add
+
+        h1.mt-5 Show Selected Items in Stock           
+        .container-fluid.w-100.mb-5.border.border-2
+            form(action="/stock/movements" method="GET")
+                .mb-3
+                    label.form-label(for="search_stock_code") Stock Code
+                    input#search_stock_code.form-control(type="text" name="stock_code" required)
+                .row
+                    .col.d-flex.justify-content-center
+                        button.btn.btn-primary.mt-3(type="submit") Display
+            .div#toPrint
+                table.table 
+                    thead 
+                        tr 
+                            th Stock Id
+                            th Stock Code 
+                            th Stock Trade Mark 
+                            th Stock Category 
+                            th Stock Model
+                            th Stock Added
+                            th Total Quantity
+                    tbody 
+                        each data in datas 
+                            tr 
+                                td=data.stock_id
+                                td=data.stock_code
+                                td=data.stock_trade_mark
+                                td=data.stock_category
+                                td=data.stock_model
+                                td=data.stock_added
+                                td=data.total_quantity
+        script(src="/print.js")

@@ -1,0 +1,29 @@
+.light {
+    font-size: 24px;
+    font-weight: bold;
+    animation: colorChange 5s infinite;
+  }
+  
+  @keyframes colorChange {
+    0% { color: red; }
+    25% { color: blue; }
+    50% { color: green; }
+    75% { color: orange; }
+    100% { color: red; }
+  }
+  
+  .moving-text1 {
+    font-size: 24px;
+    font-weight: bold;
+    animation: colorChange 3s infinite; 
+  }
+  .moving-text2 {
+    font-size: 24px;
+    font-weight: bold;
+    animation: colorChange 3s infinite; 
+  }
+
+
+  
+
+  

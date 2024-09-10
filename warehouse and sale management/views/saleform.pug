@@ -1,0 +1,81 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css")
+        title Sale Form Panel
+        script.
+            document.addEventListener('DOMContentLoaded', function() {
+                const price = document.getElementById('price');
+                const quantity = document.getElementById('sales_quantity');
+                const total_price = document.getElementById('total_price');
+
+                price.addEventListener('input', calculateTotalPrice);
+                quantity.addEventListener('input', calculateTotalPrice);
+
+                function calculateTotalPrice() {
+                    const priceValue = parseFloat(price.value) || 0;  
+                    const quantityValue = parseFloat(quantity.value) || 0;  
+
+                    const totalPriceValue = priceValue * quantityValue; 
+                    total_price.value = totalPriceValue.toFixed(2);  
+                }
+            });
+    body 
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
+            .container.fluid
+                .row.w-100.d-flex.align-items-center
+                    .col
+                        a.navbar-brand(href="/") Home Page
+                        a.navbar-brand(href="/data-queries") Query Pages
+                    .col.text-center
+                        h1.text-white Sale Form Panel
+                    .col
+
+
+        form(method="POST" action="/sell-items")
+            .row.mb-5
+                .col.md-3
+                    label.form-label(for="stock_code") Stock Code
+                    input#stock_code.form-control(type="text" name="stock_code" required)
+                .col.md-3
+                    label.form-label(for="customer_name") Customer Name
+                    input#customer_name.form-control(type="text" name="customer_name" required)
+                .col.md-3
+                    label.form-label(for="customer_surname") Customer Surname
+                    input#customer_surname.form-control(type="text" name="customer_surname" required)
+                .col.md-3
+                    label.form-label(for="email") Email
+                    input#email.form-control(type="text" name="email" required)
+                .col.md-3                   
+                    label.form-label(for="address") Address
+                    input#address.form-control(type="text" name="address" required)
+            .row.mb-5
+                .col.md-3
+                    label.form-label(for="product_name") Product Name
+                    input#product_name.form-control(type="text" name="product_name" required)
+                .col.md-3
+                    label.form-label(for="category") Category
+                    input#category.form-control(type="text" name="category" required)
+                .col.md-3
+                    label.form-label(for="price") Price
+                    input#price.form-control(type="number" step="0.01" name="price" required)
+                .col.md-3
+                    label.form-label(for="description") Description
+                    input#description.form-control(type="text" name="description" required)
+            .row.mb-5
+                .col.md-3
+                    label.form-label(for="invoice_number") Invoice Number
+                    input#invoice_number.form-control(type="number" name="invoice_number" required)  
+                .col.md-3   
+                    label.form-label(for="date") Date
+                    input#date.form-control(type="date" name="date" required)
+                .col.md-3
+                    label.form-label(for="sale_quantity") Sale Quantity
+                    input#sales_quantity.form-control(type="number" name="sale_quantity" required) 
+                .col.md-3  
+                    label.form-label(for="total_price") Total Price
+                    input#total_price.form-control(type="number" step="0.01" name="total_price" required)
+            .col-md-6.d-flex.justify-content-center.align-items-center.w-100
+                button.btn.btn-primary(type="submit") Submit
